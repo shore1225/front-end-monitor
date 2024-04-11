@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no" />
+    <title>FEM Test</title>
+    <script src="/main.js"></script>
+    <style type="text/css">
+        body {
+            background-color: #eee;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        code {
+            color: rgba(17, 31, 44, 0.56);
+            width: calc(100% - 16px);
+            display: inline-block;
+            padding: 8px;
+            background-color: #f7f7f7;
+            border-radius: 4px;
+            margin: 8px 0;
+            word-wrap: break-word;
+        }
+
+        .label {
+            color: #5c6b77;
+            margin-right: 8px;
+        }
+
+        .success-text {
+            color: #52c41a;
+        }
+
+        .warn-text {
+            color: #faad14;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 12px;
+        }
+
+        .gap {
+            height: 24px;
+        }
+
+        .tag {
+            color: #1677ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span class="label">FEM exist check:</span>
+        <span id="FEM_exist_check"></span>
+    </div>
+    <div class="gap"></div>
+    <div class="container">
+        <button>Event</button>
+        <button onclick="window.test.void = 'void'">js error</button>
+        <button onclick="Promise.reject('js error: promise')">js error: promise</button>
+        <button
+            onclick="fetch(`https://render.alipay.com/p/alertserver/180020010001207320_config/index.json`).then()">remote</button>
+        <button onclick="
+            function loadJS(url){
+                let script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = url;
+                document.head.appendChild(script);
+            }
+            
+            loadJS('path/to/your/script.js');
+        ">resource error: script</button>
+        <button onclick="
+            function loadCSS(href) {
+                let cssLink = document.createElement('link');
+                cssLink.rel = 'stylesheet';
+                cssLink.type = 'text/css';
+                cssLink.href = href;
+                document.getElementsByTagName('head')[0].appendChild(cssLink);
+            }
+            loadCSS('path/to/your/stylesheet.css');
+        ">resource error: link</button>
+    </div>
+    <div class="gap"></div>
+    <div class="container">
+        <span class="label">FEM log:</span>
+        <code id="FEM_log"></code>
+    </div>
+</body>
+
+<script>
+    // common
+    function getElementById(id) {
+        return document.getElementById(id);
+    }
+
+    function setHtmlByElId(id, html) {
+        const el = getElementById(id);
+        if (el) el.innerHTML = html;
+        return el;
+    }
+
+    function setClass(el, classes) {
+        el.setAttribute('class', Array.isArray(classes) ? classes.join(' ') : classes);
+    }
+
+    let log = '';
+
+    // FEM exist check
+    if (window.FEM) {
+        FEM.default.useAll().subscribe(ev => {
+            console.log(ev);
+            for (const item of ev) {
+                log += `<p><span class="tag">[${item.feature}]</span> ${JSON.stringify(item)}</p>`
+            }
+            setHtmlByElId('FEM_log', log);
+        });
+        const el = setHtmlByElId('FEM_exist_check', 'FEM load success');
+        setClass(el, ['success-text']);
+    } else {
+        const el = setHtmlByElId('FEM_exist_check', 'FEM load failed');
+        setClass(el, ['warn-text']);
+    }
+</script>
+
+</html>
