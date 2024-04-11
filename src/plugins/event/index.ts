@@ -28,11 +28,34 @@ export default function event(props: EventConfig) {
     } = props || {};
     for (const ev of events) {
         getTarget(target).addEventListener(ev, debounce(({ target, type }) => {
+            const tagName = target.tagName.toLowerCase();
+            if (type === 'click') {
+                if (['button', 'a', 'input'].includes(tagName) || getComputedStyle(target).cursor === 'pointer') {
+                    log('event', {
+                        text: (target as HTMLElement)?.innerText || (target as HTMLInputElement)?.value,
+                        eventType: type,
+                        tagName,
+                        selector: selectorGenerator(target as HTMLElement),
+                    });
+                }
+                return;
+            } else if (type === 'keydown') {
+                if (['textarea', 'input'].includes(tagName)) {
+                    log('event', {
+                        text: (target as HTMLElement)?.innerText || (target as HTMLInputElement)?.value,
+                        eventType: type,
+                        tagName,
+                        selector: selectorGenerator(target as HTMLElement),
+                    });
+                }
+                return;
+            }
             log('event', {
                 text: (target as HTMLElement)?.innerText || (target as HTMLInputElement)?.value,
                 eventType: type,
+                tagName,
                 selector: selectorGenerator(target as HTMLElement),
             });
-        }, 200))
+        }, 500))
     }
 }

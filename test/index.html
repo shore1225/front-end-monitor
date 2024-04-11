@@ -115,10 +115,7 @@
     // FEM exist check
     if (window.FEM) {
         FEM.default.useAll().subscribe(ev => {
-            console.log(ev);
-            for (const item of ev) {
-                log += `<p><span class="tag">[${item.feature}]</span> ${JSON.stringify(item)}</p>`
-            }
+            log += `<p><span class="tag">[${ev.feature}]</span> ${JSON.stringify(ev)}</p>`
             setHtmlByElId('FEM_log', log);
         });
         const el = setHtmlByElId('FEM_exist_check', 'FEM load success');

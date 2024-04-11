@@ -1,35 +1,17 @@
 import { CallbackFunction, IParams } from '../../interface';
 import { getFullLink } from '../../utils/url';
-import { cloneDeep } from 'lodash';
 
 class LogStack {
-    private _value: IParams[] = [];
-    private _listenCallback!: (params: IParams[]) => void;
-
-    constructor() {
-        setInterval(() => {
-            if (this._value.length > 0 && !!this._listenCallback) {
-                this._listenCallback(this.consume());
-            }
-        }, 5000);
-    }
+    private _listenCallback!: (params: IParams) => void;
 
     listen(listenCallbackcallback: CallbackFunction) {
         this._listenCallback = listenCallbackcallback;
     }
 
     addItem(params: IParams) {
-        this._value.push(params);
-    }
-
-    addSome(paramsArray: IParams[]) {
-        this._value.push(paramsArray);
-    }
-
-    consume() {
-        const source = cloneDeep(this._value);
-        this._value = [];
-        return source;
+        setTimeout(() => {
+            this._listenCallback(params);
+        });
     }
 }
 
