@@ -7,6 +7,7 @@ enum PVType {
 } 
 
 export default function pv() {
+    log(PVType.PV);
     routerChange(() => log(PVType.PV));
     routerLeave(() => log(PVType.LEAVE));
 }
