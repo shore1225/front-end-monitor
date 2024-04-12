@@ -2,6 +2,9 @@
 
 A front end monitor
 
+- 简体中文[zh_CN](README.zh_CN.md)
+- English[en_US](README.md)
+
 ## How to use
 
 1. clone to local
@@ -69,7 +72,7 @@ type PluginType =
 #### use
 
 ```
-use(pluginType: PluginType, config?: IParams) => void
+use(pluginType: PluginType, config?: IParams)
 ```
 
 use a plugin with this config
@@ -77,7 +80,7 @@ use a plugin with this config
 ### useAll
 
 ```
-useAll(config?: { [key: pluginType]: IParams }) => void
+useAll(config?: { [key: pluginType]: IParams })
 ```
 
 use all plugin with them config
@@ -85,7 +88,7 @@ use all plugin with them config
 ### log
 
 ```
-log(feature: string, others?: IParams) => void
+log(feature: string, others?: IParams)
 ```
 
 custom log
@@ -93,10 +96,21 @@ custom log
 ### subscribe
 
 ```
-subscribe(callback: CallbackFunction) => void
+subscribe(callback: CallbackFunction)
 ```
 
 subscribe log
+
+### setGlobalConfig
+
+```
+setGlobalConfig(config: GConfig)
+```
+
+set global config
+
+- debug: debug mode (console.log system information)
+- locale: locale (system information i18n)
 
 ## Plugins
 
@@ -106,6 +120,16 @@ entry page or leave page
 
 - config: --
 
+```
+{
+    // pv: entry
+    // leave: leave
+    feature,
+    // current page url
+    pageUrl,
+}
+```
+
 ### blank
 
 empty content in root element when page complated
@@ -114,7 +138,18 @@ empty content in root element when page complated
 
 | name | default | description |
 | ---- | ------- | ----------- |
-| rootSelector | '#root' | root node |
+| rootSelector | '#root' | root node, blank while this node no content |
+
+```
+{
+    // blank: blank warn
+    feature,
+    // current page url
+    pageUrl,
+    // root node
+    target,
+}
+```
 
 ### event
 
@@ -127,11 +162,44 @@ event monitor(default: `click`, `keydown`)
 | target | -- | monitor area |
 | events | ['click', 'keydown'] | event type |
 
+```
+{
+    // event: event
+    feature,
+    // current page url
+    pageUrl,
+    // target element text
+    text,
+    // event type
+    eventType,
+    // target element tag name
+    tagName,
+    // target element selector
+    selector,
+}
+```
+
 ### js-error
 
 js error or uncatch's promise
 
 - config: --
+
+```
+{
+    // js-error: js error
+    // unhandledrejection-error: unhandled rejection for Promise
+    feature,
+    // current page url
+    pageUrl,
+    // js source name
+    filename,
+    // error message
+    message,
+    // error detail message
+    stack,
+}
+```
 
 ### performance
 
@@ -149,14 +217,79 @@ web performance like: `navigation`, `resource`...
 | entryTypes | ['navigation', 'resource', 'paint', 'first-input', 'event'] | monitor types, all type at `https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry`  |
 | customReport | -- |  `(entry: Event, log: (feature: string, others?: IParams) => void` you can custom report |
 
+```
+{
+    // performance-slow-request: slow request
+    // performance-slow-source: slow source
+    // performance-slow-first-input: slow first input
+    // performance-slow-event: slow event
+    // performance-slow-navigation: slow navigation
+    feature,
+    // current page url
+    pageUrl,
+    // entryTypes item
+    entryType,
+    // detail type
+    initiatorType,
+    // duration
+    duration,
+    // name
+    name,
+    // target element
+    target,
+    // target element text
+    text,
+}
+```
+
 ### remote
 
 remote request duration, params, url...
 
 - config: --
 
+```
+{
+    // remote: remote request
+    feature,
+    // current page url
+    pageUrl,
+    // request url
+    url,
+    // params
+    params,
+    // headers
+    headers,
+    // body
+    body,
+    // method
+    method,
+    // duration
+    duration,
+    // message for success or failed
+    message,
+    // XMLHttpRequest or fetch
+    type,
+    // response
+    response,
+}
+```
+
 ### resourceError
 
 script or link load failed
 
 - config: --
+
+```
+{
+    // resource-error: resource error
+    feature,
+    // current page url
+    pageUrl,
+    // source url
+    source,
+    // script or link
+    type,
+}
+```

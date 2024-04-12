@@ -1,3 +1,5 @@
+import { g_config } from '../../config';
+import { i18n } from '../../i18n';
 import { CallbackFunction, IParams } from '../../interface';
 import { getFullLink } from '../../utils/url';
 
@@ -10,7 +12,11 @@ class LogStack {
 
     addItem(params: IParams) {
         setTimeout(() => {
-            this._listenCallback(params);
+            if (!!this._listenCallback) {
+                this._listenCallback(params);
+            } else {
+                IConsole.warn('global', i18n().CALLBACK_METHOD_DOES_NOT_EXIST);
+            }
         });
     }
 }
@@ -19,10 +25,10 @@ export const LogStackInstance = new LogStack();
 
 export const IConsole = {
     log: (type: string, msg: any) => {
-        console.log(`[FEM-${type}]`, msg);
+        g_config.debug && console.log(`[FEM-${type}]`, msg);
     },
     warn: (type: string, msg: any) => {
-        console.warn(`[FEM-${type}]`, msg);
+        g_config.debug && console.warn(`[FEM-${type}]`, msg);
     },
 };
 
@@ -30,7 +36,7 @@ export default function log(feature: string, others?: IParams) {
     const params = {
         feature,
         ...(others || {}),
-        url: getFullLink(),
+        pageUrl: getFullLink(),
     };
     IConsole.log(feature, params);
     LogStackInstance.addItem(params);
