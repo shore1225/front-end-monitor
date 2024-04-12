@@ -15,7 +15,7 @@ class LogStack {
             if (!!this._listenCallback) {
                 this._listenCallback(params);
             } else {
-                IConsole.warn('global', i18n().CALLBACK_METHOD_DOES_NOT_EXIST);
+                IConsole.warn('global', i18n('CALLBACK_METHOD_DOES_NOT_EXIST'));
             }
         });
     }

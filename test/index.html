@@ -114,7 +114,10 @@
 
     // FEM exist check
     if (window.FEM) {
-        FEM.default.useAll().subscribe(ev => {
+        FEM.default.setGlobalConfig({
+            locale: 'en_US',
+            debug: true,
+        }).useAll().subscribe(ev => {
             log += `<p><span class="tag">[${ev.feature}]</span> ${JSON.stringify(ev)}</p>`
             setHtmlByElId('FEM_log', log);
         });

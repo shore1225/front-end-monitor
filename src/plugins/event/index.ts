@@ -1,6 +1,7 @@
 import { debounce } from 'lodash';
 import log, { IConsole } from '../log';
 import { selectorGenerator } from 'dom-selector-generator';
+import { i18n } from '../../i18n';
 
 interface EventConfig {
     target?: string;
@@ -13,7 +14,7 @@ function getTarget(target?: string) {
         if (!!dom) {
             return dom;
         } else {
-            IConsole.warn('event', `expect target: ${target}, set default document`);
+            IConsole.warn('event', i18n('TARGET_NOT_FOUND', { target }));
             return document;
         }
     } else {
