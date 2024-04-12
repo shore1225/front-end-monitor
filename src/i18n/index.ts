@@ -13,7 +13,7 @@ type I18nReplace = {
 
 export function i18n(key: string, replace?: I18nReplace) {
     const locale = g_config.locale || 'en_US';
-    const i18nTemplate = langs[locale][key];
+    const i18nTemplate = (langs[locale] as any)[key];
     if (!i18nTemplate) return '';
     if (!replace) return i18nTemplate;
     return Object.keys(replace).reduce((pre, nxt) => {
