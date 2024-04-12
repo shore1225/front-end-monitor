@@ -7,7 +7,7 @@
     "lib/**/*"
   ],
   "scripts": {
-    "pub": "npm run buildLib && npm run build && node ./npm-publish.js && npm publish",
+    "pub": "npm run buildLib && npm run build && node ./npm-publish.js && npm version patch && npm publish",
     "buildLib": "rm -rf ./lib && tsc --project tsconfig.build.json",
     "build": "rm -rf ./dist && webpack --config webpack.prod.js",
     "start": "webpack-dev-server --config webpack.dev.js"
