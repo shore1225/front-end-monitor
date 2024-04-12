@@ -13,25 +13,31 @@
 https://github.com/shore1225/front-end-monitor.git
 ```
 
-2. 你可以打包资源，并把打包后的资源发到线上作为远程 js 引用
+2. 通过远程资源使用：你可以打包资源，并把打包后的资源发到线上作为远程 js 引用
 
 ```
 npm run build
 ```
 
+3. 通过 npm 引用：安装它
+
+```
+npm i front-end-monitor
+```
+
 ## 最佳实践
 
-1. 在 html 中引入远程 js 资源
+1. 通过远程资源使用：在 html 中引入远程 js 资源
 
 ```
 <script src="${your resource}"></script>
 ```
 
-2. 使用需要的插件并订阅
+2. 通过远程资源使用：使用需要的插件并订阅
 
 ```
 <script>
-    window.FEM.useAll({
+    window.FEM.default.useAll({
         // configs
         PERFORMANCE: { ... },
         ...
@@ -43,13 +49,36 @@ npm run build
 or
 
 <script>
-    window.FEM.use('PERFORMANCE', {
+    window.FEM.default.use('PERFORMANCE', {
         // config
         ...
     }).use('xxx').subscribe(ev => {
         console.log(ev);
     });
 </script>
+```
+
+3. 通过 npm 使用
+
+```
+import FEM from 'front-end-monitor';
+
+FEM.useAll({
+    // configs
+    PERFORMANCE: { ... },
+    ...
+}).subscribe(ev => {
+    console.log(ev);
+});
+
+or
+
+FEM.use('PERFORMANCE', {
+    // config
+    ...
+}).use('xxx').subscribe(ev => {
+    console.log(ev);
+});
 ```
 
 ## API

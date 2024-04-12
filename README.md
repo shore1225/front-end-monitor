@@ -13,25 +13,31 @@ A front end monitor
 https://github.com/shore1225/front-end-monitor.git
 ```
 
-2. you can build it and publish online, build like this
+2. use for remote js: you can build it and publish online, build like this
 
 ```
 npm run build
 ```
 
+2. use for npm: install it
+
+```
+npm i front-end-monitor
+```
+
 ## Best practices
 
-1. load your resource at HTML
+1. use for remote js: load your resource at HTML
 
 ```
 <script src="${your resource}"></script>
 ```
 
-2. load plugins as you wish, and subscribe them
+2. use for remote js: load plugins as you wish, and subscribe them
 
 ```
 <script>
-    window.FEM.useAll({
+    window.FEM.default.useAll({
         // configs
         PERFORMANCE: { ... },
         ...
@@ -43,13 +49,36 @@ npm run build
 or
 
 <script>
-    window.FEM.use('PERFORMANCE', {
+    window.FEM.default.use('PERFORMANCE', {
         // config
         ...
     }).use('xxx').subscribe(ev => {
         console.log(ev);
     });
 </script>
+```
+
+3. use for npm
+
+```
+import FEM from 'front-end-monitor';
+
+FEM.useAll({
+    // configs
+    PERFORMANCE: { ... },
+    ...
+}).subscribe(ev => {
+    console.log(ev);
+});
+
+or
+
+FEM.use('PERFORMANCE', {
+    // config
+    ...
+}).use('xxx').subscribe(ev => {
+    console.log(ev);
+});
 ```
 
 ## API
