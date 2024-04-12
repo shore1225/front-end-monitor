@@ -1,5 +1,5 @@
 {
-  "name": "front-end-monitor",
+  "name": "web-front-end-monitor",
   "version": "0.0.1",
   "description": "Monitor for front",
   "main": "./lib/index.js",

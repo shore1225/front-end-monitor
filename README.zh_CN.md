@@ -22,7 +22,7 @@ npm run build
 3. 通过 npm 引用：安装它
 
 ```
-npm i front-end-monitor
+npm i web-front-end-monitor
 ```
 
 ## 最佳实践
@@ -61,7 +61,7 @@ or
 3. 通过 npm 使用
 
 ```
-import FEM from 'front-end-monitor';
+import FEM from 'web-front-end-monitor';
 
 FEM.useAll({
     // configs

@@ -22,7 +22,7 @@ npm run build
 2. use for npm: install it
 
 ```
-npm i front-end-monitor
+npm i web-front-end-monitor
 ```
 
 ## Best practices
@@ -61,7 +61,7 @@ or
 3. use for npm
 
 ```
-import FEM from 'front-end-monitor';
+import FEM from 'web-front-end-monitor';
 
 FEM.useAll({
     // configs
