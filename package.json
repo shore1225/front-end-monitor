@@ -1,6 +1,6 @@
 {
   "name": "web-front-end-monitor",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Monitor for front",
   "main": "./lib/index.js",
   "files": [

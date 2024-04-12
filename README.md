@@ -5,35 +5,15 @@ A front end monitor
 - 简体中文[zh_CN](README.zh_CN.md)
 - English[en_US](README.md)
 
-## How to use
+## Use by CDN
 
-1. clone to local
-
-```
-https://github.com/shore1225/front-end-monitor.git
-```
-
-2. use for remote js: you can build it and publish online, build like this
+1. load CDN at HTML
 
 ```
-npm run build
+<script src="https://cdn.jsdelivr.net/npm/web-front-end-monitor@latest/lib/main.js"></script>
 ```
 
-2. use for npm: install it
-
-```
-npm i web-front-end-monitor
-```
-
-## Best practices
-
-1. use for remote js: load your resource at HTML
-
-```
-<script src="${your resource}"></script>
-```
-
-2. use for remote js: load plugins as you wish, and subscribe them
+2. use FEM
 
 ```
 <script>
@@ -58,7 +38,15 @@ or
 </script>
 ```
 
-3. use for npm
+## Use by npm
+
+1. install it
+
+```
+npm i web-front-end-monitor
+```
+
+2. use FEM
 
 ```
 import FEM from 'web-front-end-monitor';

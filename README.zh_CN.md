@@ -5,35 +5,15 @@
 - 简体中文[zh_CN](README.zh_CN.md)
 - English[en_US](README.md)
 
-## 如何使用
+## 使用 CDN
 
-1. 克隆仓库到本地
-
-```
-https://github.com/shore1225/front-end-monitor.git
-```
-
-2. 通过远程资源使用：你可以打包资源，并把打包后的资源发到线上作为远程 js 引用
+1. 在 html 中引入 CDN
 
 ```
-npm run build
+<script src="https://cdn.jsdelivr.net/npm/web-front-end-monitor@latest/lib/main.js"></script>
 ```
 
-3. 通过 npm 引用：安装它
-
-```
-npm i web-front-end-monitor
-```
-
-## 最佳实践
-
-1. 通过远程资源使用：在 html 中引入远程 js 资源
-
-```
-<script src="${your resource}"></script>
-```
-
-2. 通过远程资源使用：使用需要的插件并订阅
+2. 使用 FEM
 
 ```
 <script>
@@ -58,7 +38,15 @@ or
 </script>
 ```
 
-3. 通过 npm 使用
+## 使用 npm
+
+1. 安装依赖
+
+```
+npm i web-front-end-monitor
+```
+
+2. 使用 FEM
 
 ```
 import FEM from 'web-front-end-monitor';
